@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Places</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/icon.png') }}" type="image/icon type">
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+
+</head>
+<body>
+
+
+<div id="photo-wrapper">
+
+    <div id="left-side"></div>
+    <div id="right-side"></div>
+
+    <div class="banner_tree"></div>
+    <p class="first-para">Choose a location</p>
+
+    <div id="select-wrapper">
+        <form method="get" action="" id="viewmap" name="viewmap" target="_blank">
+            <select id="select-list" name="select">
+                <option value="{{ places[0].get_larger_map() }}" selected>{{places[0].get_name()}}</option>
+                {% for place in places[1:] %}
+                  <option value="{{ place.get_larger_map() }}">{{ place.get_name() }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" id="input-wrapper" value="View Map" onclick="view_map()">
+        </form>
+    </div>
+
+    <button onclick="location.href = '/'" class="button-wrapper-back">Back</button>
+
+    <footer></footer>
+
+</div>
+
+<script>
+    document.getElementById("input-wrapper").onsubmit = function () {
+        location.href = "/selected_city";
+    };
+    function view_map()
+    {
+        var e = document.getElementById("select-list");
+        var view_map = e.options[e.selectedIndex].value;
+        window.open(view_map);
+    }
+
+</script>
+
+
+</body>
+</html>

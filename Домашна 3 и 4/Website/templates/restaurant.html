@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/icon.png') }}" type="image/icon type">
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+
+</head>
+<body>
+
+
+<div id="photo-wrapper">
+
+    <div id="left-side"></div>
+    <div id="right-side"></div>
+
+    <div class="banner_two"></div>
+    <p class="first-para">Select a city</p>
+
+    <div id="select-wrapper">
+        <form action="/restaurant/choices">
+            <select name="city" method="GET" action="/" id="select-list">
+                <option value="{{cities[0]}}" selected>{{cities[0]}}</option>
+                {% for city in cities[1:] %}
+                  <option value="{{city}}">{{city}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" id="input-wrapper" value="SUBMIT">
+        </form>
+    </div>
+
+    <button onclick="location.href = '/'" class="button-wrapper-back">Back</button>
+
+    <footer></footer>
+
+</div>
+
+<script>
+    document.getElementById("input-wrapper").onsubmit = function () {
+        location.href = "/selected_city";
+    };
+</script>
+
+
+</body>
+</html>
